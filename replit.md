@@ -1,120 +1,132 @@
 # PlanetCo Platform
 
 ## Overview
+A modern product showcase platform for PlanetCo's AI-powered development tools. The platform features a responsive design, product filtering, detailed product pages, and smart modal interactions for products in development.
 
-PlanetCo Platform is a B2B SaaS web application showcasing AI-powered development tools. The platform presents three main products (Studio, Console, and Insights) through a modern, tech-forward marketing website. Built as a full-stack TypeScript application, it features a React frontend with shadcn/ui components and an Express backend with in-memory data storage.
+## Architecture
 
-## User Preferences
+### Frontend (React + TypeScript)
+- **Framework**: React with Wouter for routing
+- **Styling**: Tailwind CSS with Shadcn UI components
+- **State Management**: TanStack Query for server state
+- **Key Features**:
+  - Responsive product grid with category filtering
+  - Dynamic product detail pages
+  - Modal for unavailable products
+  - Mobile-responsive navigation with hamburger menu
+  - Legal pages (Impressum, Datenschutz)
 
-Preferred communication style: Simple, everyday language.
+### Backend (Express + TypeScript)
+- **Storage**: In-memory storage for product data
+- **API Endpoints**:
+  - `GET /api/products` - Fetch all products
+  - `GET /api/products/:id` - Fetch product by ID
 
-## System Architecture
+## Project Structure
 
-### Frontend Architecture
+```
+client/
+├── src/
+│   ├── components/
+│   │   ├── ProductCard.tsx     # Product card with hover effects
+│   │   ├── Header.tsx          # Responsive navigation header
+│   │   ├── Footer.tsx          # Site footer with links
+│   │   └── ProductModal.tsx    # "Coming Soon" modal
+│   ├── pages/
+│   │   ├── Home.tsx            # Homepage with product grid
+│   │   ├── ProductDetail.tsx   # Product detail page
+│   │   ├── Impressum.tsx       # Legal impressum
+│   │   └── Datenschutz.tsx     # Privacy policy
+│   ├── App.tsx                 # Route configuration
+│   └── index.css               # Global styles and utilities
 
-**Framework & Build System**
-- React 18 with TypeScript for type-safe component development
-- Vite as the build tool and development server for fast hot module replacement
-- Wouter for lightweight client-side routing (replaces heavier alternatives like React Router)
+server/
+├── storage.ts                  # In-memory data storage
+└── routes.ts                   # API route handlers
 
-**UI Component System**
-- shadcn/ui component library (New York style variant) providing pre-built, accessible React components
-- Radix UI primitives for unstyled, accessible component foundations
-- Tailwind CSS for utility-first styling with custom design tokens
-- Design system follows modern B2B SaaS aesthetics (Linear, Vercel, Stripe inspired) with emphasis on clarity and tech-forward presentation
+shared/
+└── schema.ts                   # TypeScript types and Zod schemas
+```
 
-**State Management**
-- TanStack Query (React Query) for server state management, data fetching, and caching
-- React hooks for local component state
-- No global state management library needed due to application simplicity
+## Products
 
-**Styling Approach**
-- Custom CSS variables for theme colors supporting light/dark modes
-- Tailwind configuration with extended color palette and custom spacing
-- Component variants using class-variance-authority for consistent styling patterns
-- Hover/active states implemented through CSS utility classes (hover-elevate, active-elevate-2)
+### PlanetCo Studio
+- **Status**: Alpha
+- **Category**: Build
+- **Description**: Visual builder for AI workflows, from prototype to production
+- **Capabilities**: Drag-and-drop pipelines, Secrets & keys vault, One-click deploy
 
-### Backend Architecture
+### PlanetCo Console
+- **Status**: Private Beta
+- **Category**: Ops
+- **Description**: Unified control of your AI stack
+- **Capabilities**: Env configs, Zero-downtime rollouts, Role-based access
 
-**Server Framework**
-- Express.js running on Node.js with TypeScript
-- ESM module system for modern JavaScript features
-- Custom middleware for request logging and JSON parsing
+### PlanetCo Insights
+- **Status**: Live
+- **Category**: Analytics
+- **Description**: Real-time metrics & alerts for AI workflows
+- **Capabilities**: Latency breakdowns, Error tracing, Alert routing
+- **URL**: https://insights.planetco.ai
 
-**API Design**
-- RESTful API endpoints following simple CRUD patterns
-- Product endpoints: `GET /api/products` (list all) and `GET /api/products/:id` (single product)
-- JSON responses with appropriate error handling
+## Key Features
 
-**Data Layer**
-- In-memory storage implementation (MemStorage class) - no database persistence
-- Storage abstracted behind IStorage interface for potential future database integration
-- Initial product data seeded on application startup
-- Data schema validation using Zod for type safety
+### Category Filtering
+- Filter products by category (Build, Ops, Analytics)
+- Interactive badge UI with hover effects
+- Maintains state during navigation
 
-**Development Environment**
-- Vite middleware integration in development for seamless frontend/backend development
-- Express serves Vite dev server in development, static files in production
-- Custom error logging with formatted timestamps
+### Product Cards
+- Hover animations with image zoom
+- Status pills with color coding (Alpha, Private Beta, Live)
+- Category indicators with color-coded dots
+- Responsive grid layout (1 col mobile, 2 col tablet, 3 col desktop)
 
-### Data Storage Solutions
+### Product Detail Pages
+- Hero banner with product thumbnail
+- Sidebar with CTA and metadata
+- Key capabilities grid with checkmarks
+- Smart "Use Product" button:
+  - Opens external URL for live products
+  - Shows "Coming Soon" modal for products in development
 
-**Current Implementation**
-- In-memory Map-based storage (volatile, resets on restart)
-- No database required for current functionality
-- Product data structure includes: id, name, tagline, status, category, url, learn path, thumbnail, pill label, overview, and capabilities array
+### Design System
+- **Colors**: Professional blue and purple gradient accents
+- **Typography**: Inter font family with carefully tuned hierarchy
+- **Spacing**: Consistent 8px grid system
+- **Components**: Shadcn UI with custom hover/active states
+- **Interactions**: Subtle elevations on hover, smooth transitions
 
-**Database Preparation**
-- Drizzle ORM configured for PostgreSQL (drizzle.config.ts present)
-- Schema definition location: `shared/schema.ts`
-- Migration system ready but not active
-- Neon serverless driver included for future PostgreSQL connection
-- Note: Application can function without database; Drizzle/Postgres setup exists for potential future persistence needs
+## Running the Project
 
-**Data Validation**
-- Zod schemas define product types and API response shapes
-- Type inference ensures TypeScript types match runtime validation
-- Shared schema definitions between frontend and backend (`shared/schema.ts`)
+```bash
+npm run dev
+```
 
-### External Dependencies
+The application will start on port 5000 with both frontend and backend.
 
-**UI Component Libraries**
-- @radix-ui/* packages: Accessible, unstyled component primitives (accordion, dialog, dropdown, etc.)
-- shadcn/ui: Pre-styled component layer built on Radix UI
-- lucide-react: Icon library for consistent iconography
-- cmdk: Command palette component
-- embla-carousel-react: Touch-friendly carousel component
+## Performance Optimizations
+- Lazy-loaded images
+- Optimized TanStack Query caching
+- Minimal JavaScript bundle
+- CSS-based animations (GPU-accelerated)
+- Static generation ready
 
-**Form & Validation**
-- @hookform/resolvers: React Hook Form integration with validation libraries
-- zod: Runtime type validation and schema definition
-- drizzle-zod: Generate Zod schemas from Drizzle database schemas
+## Future Enhancements
+- Cookie consent banner and Google Analytics
+- Subdomain routing (studio.planetco.ai, etc.)
+- Admin dashboard for content management
+- Product comparison feature
+- Newsletter signup and waitlist functionality
 
-**Styling & Utilities**
-- tailwindcss: Utility-first CSS framework
-- class-variance-authority: Type-safe variant styling
-- clsx & tailwind-merge: Conditional class name utilities
-- date-fns: Date formatting and manipulation
-
-**State Management & Data Fetching**
-- @tanstack/react-query: Server state management and caching
-
-**Database & ORM** (configured but not actively used)
-- drizzle-orm: TypeScript ORM for SQL databases
-- @neondatabase/serverless: Neon PostgreSQL serverless driver
-- drizzle-kit: Database migration tools
-
-**Development Tools**
-- @replit/vite-plugin-*: Replit-specific development enhancements
-- tsx: TypeScript execution for Node.js
-- esbuild: Fast JavaScript bundler for production builds
-- vite: Frontend build tool and dev server
-
-**Fonts** (loaded via Google Fonts CDN)
-- Inter: Primary font for headlines and body text
-- JetBrains Mono/Geist Mono/Fira Code: Monospace fonts for technical/code elements
-- DM Sans: Alternative sans-serif option
-- Architects Daughter: Decorative/accent font
-
-**Session Management**
-- connect-pg-simple: PostgreSQL session store (configured but not actively used)
+## Recent Changes
+- **2025-10-26**: Initial implementation with all MVP features
+  - Created product schema and TypeScript types
+  - Generated product thumbnail images
+  - Built all frontend components and pages
+  - Implemented backend API with in-memory storage
+  - Added responsive navigation and mobile menu
+  - Integrated smart modal for unavailable products
+  - Created legal pages (Impressum, Datenschutz)
+  - Fixed nested interactive elements (Button/Link)
+  - Comprehensive end-to-end testing completed
