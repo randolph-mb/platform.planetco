@@ -1,0 +1,189 @@
+/* Design System - Inspired by Apple & OpenAI */
+:root {
+  /* Colors - Minimal Palette */
+  --color-primary: #000000;
+  --color-secondary: #86868b;
+  --color-tertiary: #f5f5f7;
+  --color-white: #ffffff;
+  --color-border: #d2d2d7;
+  --color-accent: #0071e3;
+
+  /* Typography */
+  --font-primary: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+  --spacing-2xl: 8rem;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-narrow: 800px;
+
+  /* Transitions */
+  --transition-base: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-slow: 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 17px;
+  line-height: 1.47059;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-primary);
+  background-color: var(--color-white);
+}
+
+/* Typography Scale */
+.headline-large {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 1.05;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.015em;
+}
+
+.headline-medium {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+}
+
+.headline-small {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+  font-weight: var(--font-weight-semibold);
+}
+
+.body-large {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--color-secondary);
+}
+
+.body-regular {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-secondary);
+}
+
+/* Container */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container-narrow {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Section Spacing */
+section {
+  padding: var(--spacing-2xl) 0;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: var(--spacing-xl) 0;
+  }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  border-radius: 980px;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: #0077ed;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+/* Links */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: opacity var(--transition-base);
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
