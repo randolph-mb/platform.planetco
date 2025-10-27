@@ -1,6 +1,12 @@
-node_modules
-dist
+# macOS
 .DS_Store
-server/public
-vite.config.ts.*
-*.tar.gz
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
