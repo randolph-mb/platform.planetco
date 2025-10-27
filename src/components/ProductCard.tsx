@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { type Product } from "@shared/schema";
+import { type Product } from "@/types/product";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";

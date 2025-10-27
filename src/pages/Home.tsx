@@ -1,22 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
-import { type Product } from "@shared/schema";
+import { type Product } from "@/types/product";
 import { ProductCard } from "@/components/ProductCard";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { products as allProducts } from "@/data/products";
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const { data: products, isLoading } = useQuery<Product[]>({
-    queryKey: ["/api/products"],
-  });
-
   const categories = ["Build", "Ops", "Analytics"];
 
-  const filteredProducts = products?.filter(
+  const filteredProducts = allProducts.filter(
     (product) => !selectedCategory || product.category === selectedCategory
   );
 
@@ -71,11 +66,7 @@ export default function Home() {
 
         <section className="py-12 md:py-20">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            {isLoading ? (
-              <div className="flex items-center justify-center py-32" data-testid="loader-products">
-                <Loader2 className="w-8 h-8 animate-spin text-primary" />
-              </div>
-            ) : filteredProducts && filteredProducts.length > 0 ? (
+            {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-testid="grid-products">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
