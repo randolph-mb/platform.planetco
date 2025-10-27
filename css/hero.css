@@ -1,0 +1,44 @@
+/* Hero Section - Minimal & Impactful */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  background-color: var(--color-white);
+  margin-top: 44px;
+}
+
+.hero__content {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.hero__headline {
+  margin-bottom: var(--spacing-md);
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s forwards;
+}
+
+.hero__subheadline {
+  margin-bottom: var(--spacing-lg);
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s forwards;
+}
+
+.hero__cta {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.6s forwards;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 80vh;
+    padding: var(--spacing-xl) var(--spacing-sm);
+  }
+}
