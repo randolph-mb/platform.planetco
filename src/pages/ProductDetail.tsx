@@ -1,25 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
-import { type Product } from "@shared/schema";
+import { type Product } from "@/types/product";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, CheckCircle2, ExternalLink, Loader2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ExternalLink } from "lucide-react";
 import { ProductModal } from "@/components/ProductModal";
 import { useState } from "react";
+import { products } from "@/data/products";
 
 export default function ProductDetail() {
   const [, params] = useRoute("/product/:id");
   const productId = params?.id;
   const [modalOpen, setModalOpen] = useState(false);
 
-  const { data: products, isLoading } = useQuery<Product[]>({
-    queryKey: ["/api/products"],
-  });
-
-  const product = products?.find((p) => p.id === productId);
+  const product = products.find((p) => p.id === productId);
 
   const getStatusVariant = (status: string) => {
     switch (status) {
@@ -56,18 +52,6 @@ export default function ProductDetail() {
       setModalOpen(true);
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1 flex items-center justify-center">
-          <Loader2 className="w-8 h-8 animate-spin text-primary" data-testid="loader-product" />
-        </main>
-        <Footer />
-      </div>
-    );
-  }
 
   if (!product) {
     return (
