@@ -70,9 +70,7 @@ export class HomePage {
     footer.innerHTML = `
       <div class="footer__container">
         <p class="footer__text">© 2024 PlanetCo. All rights reserved.</p>
-        <p class="footer__text">
-          Built with <a href="https://claude.com/claude-code" class="footer__link" target="_blank">Claude Code</a>
-        </p>
+        
       </div>
     `;
     document.getElementById('app').appendChild(footer);
