@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
+import Sidebar from './components/layout/Sidebar';
+import Header from './components/layout/Header';
 import Dashboard from './components/Dashboard';
 import DataAnalysisPage from './pages/DataAnalysisPage';
 import FineTuningPage from './pages/FineTuningPage';

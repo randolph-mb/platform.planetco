@@ -1,7 +1,7 @@
 import React from 'react';
 import { LayoutDashboard, Sliders, Bot, Mic, BarChart2, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 
 const Sidebar = () => {
     const menuItems = [
@@ -28,8 +28,8 @@ const Sidebar = () => {
                         key={index}
                         to={item.path}
                         className={({ isActive }) => `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${isActive
-                                ? 'bg-blue-600/10 text-blue-400 border-l-2 border-blue-500'
-                                : 'hover:bg-slate-800/50 hover:text-slate-200 hover:pl-5'
+                            ? 'bg-blue-600/10 text-blue-400 border-l-2 border-blue-500'
+                            : 'hover:bg-slate-800/50 hover:text-slate-200 hover:pl-5'
                             }`}
                     >
                         {({ isActive }) => (
