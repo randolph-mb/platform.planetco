@@ -6,7 +6,8 @@ export const fetchDashboardData = async () => {
 
     let newsData = [];
     try {
-        const response = await fetch(import.meta.env.VITE_NEWS_API_URL);
+        const apiUrl = 'https://2j8mpvbju8.execute-api.eu-central-1.amazonaws.com/news';
+        const response = await fetch(apiUrl);
         const result = await response.json();
 
         if (result.news && result.news.length > 0) {
