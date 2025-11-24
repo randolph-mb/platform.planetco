@@ -14,7 +14,7 @@ const Sidebar = () => {
     ];
 
     return (
-        <div className="w-64 h-screen bg-slate-900 text-slate-400 flex flex-col fixed left-0 top-0 border-r border-slate-800 shadow-xl z-20">
+        <div className="w-64 h-screen bg-slate-900 text-slate-400 flex-col fixed left-0 top-0 border-r border-slate-800 shadow-xl z-20 hidden md:flex">
             <div className="p-6 mb-2">
                 <div className="flex items-center gap-3">
                     <img src={logo} alt="PlanetCo Logo" className="w-9 h-9 object-contain" />

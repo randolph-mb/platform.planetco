@@ -46,8 +46,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         {/* Main Content - AI History Carousel */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgb(0,0,0,0.04)] border border-slate-100 relative overflow-hidden group hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] transition-all duration-300 h-full flex flex-col justify-between">
@@ -123,7 +123,13 @@ const Dashboard = () => {
 
           <div className="space-y-4">
             {news.map((item) => (
-              <div key={item.id} className="bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md hover:border-blue-100 transition-all cursor-pointer group">
+              <a
+                key={item.id}
+                href={item.url || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md hover:border-blue-100 transition-all cursor-pointer group"
+              >
                 {item.image ? (
                   <div className="flex gap-4">
                     <div className="w-16 h-16 bg-slate-100 rounded-lg flex-shrink-0 overflow-hidden border border-slate-100">
@@ -151,7 +157,7 @@ const Dashboard = () => {
                     </p>
                   </>
                 )}
-              </div>
+              </a>
             ))}
           </div>
         </div>
