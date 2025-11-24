@@ -4,6 +4,33 @@ export const fetchDashboardData = async () => {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 800));
 
+    let newsData = [];
+    try {
+        const response = await fetch(import.meta.env.VITE_NEWS_API_URL);
+        const result = await response.json();
+
+        if (result.news && result.news.length > 0) {
+            newsData = result.news;
+        } else if (result.error) {
+            console.warn('News API Error:', result.error);
+            // Fallback to mock data with an error indicator item
+            newsData = [
+                {
+                    id: 0,
+                    title: 'Setup Required: Add News API Key',
+                    category: 'System',
+                    time: 'Now',
+                    description: 'Please update the NEWS_API_KEY environment variable in your AWS Lambda function to see real news.',
+                    image: null
+                },
+                ...getMockNews()
+            ];
+        }
+    } catch (error) {
+        console.error('Failed to fetch news:', error);
+        newsData = getMockNews();
+    }
+
     return {
         stats: {
             trainingTime: '45 Min.',
@@ -44,31 +71,34 @@ export const fetchDashboardData = async () => {
                 icon: 'Cpu'
             }
         ],
-        news: [
-            {
-                id: 1,
-                title: 'Voice Agent v2.0 Available',
-                category: 'New Service',
-                time: '2h ago',
-                description: 'Permanent Optimization of Call Centers with improved latency and natural sounding voices.',
-                image: null
-            },
-            {
-                id: 2,
-                title: 'OpenAI Pricing Update',
-                category: 'Platform Maintenance',
-                time: '1d ago',
-                description: 'Platform Maintenance',
-                image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=150&h=150&fit=crop'
-            },
-            {
-                id: 3,
-                title: 'Database Optimization',
-                category: 'Scheduled Maintenance',
-                time: '2d ago',
-                description: 'Scheduled Maintenance',
-                image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=150&h=150&fit=crop'
-            }
-        ]
+        news: newsData
     };
 };
+
+const getMockNews = () => [
+    {
+        id: 1,
+        title: 'Voice Agent v2.0 Available',
+        category: 'New Service',
+        time: '2h ago',
+        description: 'Permanent Optimization of Call Centers with improved latency and natural sounding voices.',
+        image: null
+    },
+    {
+        id: 2,
+        title: 'OpenAI Pricing Update',
+        category: 'Platform Maintenance',
+        time: '1d ago',
+        description: 'Platform Maintenance',
+        image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=150&h=150&fit=crop'
+    },
+    {
+        id: 3,
+        title: 'Database Optimization',
+        category: 'Scheduled Maintenance',
+        time: '2d ago',
+        description: 'Scheduled Maintenance',
+        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=150&h=150&fit=crop'
+    }
+];
+
