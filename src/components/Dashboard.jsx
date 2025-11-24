@@ -130,33 +130,31 @@ const Dashboard = () => {
                 rel="noopener noreferrer"
                 className="block bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md hover:border-blue-100 transition-all cursor-pointer group"
               >
-                {item.image ? (
-                  <div className="flex gap-4">
-                    <div className="w-16 h-16 bg-slate-100 rounded-lg flex-shrink-0 overflow-hidden border border-slate-100">
-                      <div className="w-full h-full bg-slate-800 flex items-center justify-center text-slate-500">
-                        <img src={item.image} alt="News" className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500" />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-slate-800 text-sm mb-1 truncate group-hover:text-blue-600 transition-colors">{item.title}</h4>
-                      <p className="text-xs text-slate-500 mb-2">{item.category}</p>
-                      <div className="flex items-center text-blue-500 text-[10px] font-bold gap-1">
-                        Read More <ArrowRight size={10} />
-                      </div>
-                    </div>
+                <div className="flex justify-between items-start mb-3">
+                  <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full uppercase tracking-wide">
+                    {item.category}
+                  </span>
+                  <span className="text-[10px] text-slate-400">{item.time}</span>
+                </div>
+
+                <h4 className="font-bold text-slate-800 text-base mb-3 group-hover:text-blue-600 transition-colors leading-snug">
+                  {item.title}
+                </h4>
+
+                <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  {item.description || 'Discover the latest developments in AI technology and how they impact the industry.'}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-blue-600 text-xs font-semibold gap-1.5 group-hover:gap-2.5 transition-all">
+                    Read More <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                ) : (
-                  <>
-                    <div className="flex justify-between items-start mb-3">
-                      <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{item.category}</span>
-                      <span className="text-[10px] text-slate-400">{item.time}</span>
+                  {item.image && (
+                    <div className="w-12 h-12 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+                      <img src={item.image} alt="" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
                     </div>
-                    <h4 className="font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">{item.title}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
-                      {item.description}
-                    </p>
-                  </>
-                )}
+                  )}
+                </div>
               </a>
             ))}
           </div>
