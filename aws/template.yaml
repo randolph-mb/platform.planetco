@@ -40,15 +40,27 @@ Resources:
                   };
               }
               const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(topic)}&sortBy=publishedAt&language=en&apiKey=${apiKey}`;
+              const options = {
+                  headers: {
+                      'User-Agent': 'PlanetCo-Platform/1.0'
+                  }
+              };
               try {
                   const data = await new Promise((resolve, reject) => {
-                      https.get(url, (res) => {
+                      https.get(url, options, (res) => {
                           let body = '';
                           res.on('data', (chunk) => body += chunk);
                           res.on('end', () => resolve(JSON.parse(body)));
                       }).on('error', (e) => reject(e));
                   });
-                  const news = data.articles?.slice(0, 5).map((article, index) => ({
+                  if (!data.articles) {
+                      return {
+                          statusCode: 200,
+                          headers: { "Access-Control-Allow-Origin": "*" },
+                          body: JSON.stringify({ news: [], debug: data })
+                      };
+                  }
+                  const news = data.articles.slice(0, 5).map((article, index) => ({
                       id: index,
                       title: article.title,
                       category: article.source.name,
